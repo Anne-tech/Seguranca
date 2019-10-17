@@ -137,6 +137,30 @@ int *codifica(char *mensagem, long long e, long long n){
 	return mensagemC;
 }
 
+//Decodifica um vetor de inteiros em uma string de caracteres usando o resto da divisão de a^d por n para cada inteiro
+void decodifica(int *mensagemC, long long de, long long num){
+	
+	long long i;
+	FILE *file;
+        file = fopen("decripto.txt", "a+");
+ 
+        if(file == NULL) {
+            printf("Erro ao criar o Arquivo test.txt.\n");
+            exit(1);
+        }
+		
+	mensagemD = malloc(100 * sizeof(char));
+	
+	for(i = 0; i < 100; i++){
+		mensagemD[i] = potencia(mensagemC[i], de, num);
+	}
+	
+	fputs(mensagemD,file);
+	fclose(file);
+
+}
+
+
 void criptografia(char *mensagem){
 	
 	FILE *file;
@@ -176,7 +200,13 @@ void criptografia(char *mensagem){
 	}
 	
 	fclose(file);
-
+	
+	//Decodifica a mensagem
+	//char *mensagemD;
+	decodifica(mensagemC, d, n);
+	//colocanoarquivo(mensagemD);
+	//printf("\nMensagem decriptada: %s\n\n", mensagemD);
+	
 }
 
  
