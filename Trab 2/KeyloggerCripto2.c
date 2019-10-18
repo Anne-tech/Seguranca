@@ -170,9 +170,9 @@ void criptografia(char *mensagem){
         printf("Erro ao criar o Arquivo test.txt.\n");
         exit(1);
     }
-	
+	//p883 p2=997
 	long long i;
-	long long p=883, p2=997, n, phi, e, d;
+	long long p=7919, p2=7879, n, phi, e, d;
 	int *mensagemC;
 	
 	//Calcula o n
@@ -184,19 +184,20 @@ void criptografia(char *mensagem){
 	//Escolhe o e para calcular a chave publica
 	e = escolheE(phi, p, p2, n);
 	
-	printf("\nChave publica: (%llu, %llu)\n", e, n);
+	//printf("\nChave publica: (%llu, %llu)\n", e, n);
 
 	//Escolhe o d para calcular a chave privada
 	d = mdcEstendido(phi, e);
 
-	printf("\nChave privada: (%llu, %llu,%llu)\n", p,p2, d);
+	//printf("\nChave privada: (%llu, %llu,%llu)\n", p,p2, d);
 
 	//Codifica a mensagem
 	mensagemC = codifica(mensagem, e, n);
 	
 	for(i = 0; i < strlen(mensagem); i++){
-		fputc(mensagemC[i],file);
-		
+		//fputc(mensagemC[i],file);
+		fprintf(file,"%ld",mensagemC[i]);
+		//printf("%ld",mensagemC[i]);
 	}
 	
 	fclose(file);
